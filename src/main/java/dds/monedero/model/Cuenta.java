@@ -13,7 +13,9 @@ public class Cuenta {
 
   private double saldo = 0;
   private List<Movimiento> movimientos = new ArrayList<>();
-  private double limite;
+ 
+
+  private double limite = 1000;
 
   public Cuenta() {
     saldo = 0;
@@ -79,7 +81,7 @@ public class Cuenta {
 
   public double getMontoExtraidoA(LocalDate fecha) {
     return getMovimientos().stream()
-        .filter(movimiento -> !movimiento.isDeposito() && movimiento.getFecha().equals(fecha))
+        .filter(movimiento -> movimiento.fueExtraidoEn(fecha))
         .mapToDouble(Movimiento::getMonto)
         .sum();
   }

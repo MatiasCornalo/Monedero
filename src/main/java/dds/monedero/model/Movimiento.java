@@ -24,15 +24,14 @@ public class Movimiento {
     return fecha;
   }
 
-  public boolean fueDepositadoEn(LocalDate fecha) {
-    return isDeposito() && esDeLaFecha(fecha);
-  }
-
   public boolean fueExtraidoEn(LocalDate fecha) {
-    return isExtraccion() && esDeLaFecha(fecha);
-
+    return tipo.isExtraccion() && esDeLaFecha(fecha);
   }
-  
+
+  public boolean isDeposito(){
+    return !tipo.isExtraccion();
+  }
+
   public boolean esDeLaFecha(LocalDate fecha) {
     return this.fecha.equals(fecha);
   }
@@ -40,4 +39,5 @@ public class Movimiento {
   public void modificarSaldo(Cuenta cuenta) {
     tipo.modificarSaldo(cuenta,monto);
   }
+
 }
