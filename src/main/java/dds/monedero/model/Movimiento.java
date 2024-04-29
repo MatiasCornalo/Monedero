@@ -41,3 +41,6 @@ public class Movimiento {
   }
 
 }
+
+
+// type test: Code smell 1, nose como corregirlo

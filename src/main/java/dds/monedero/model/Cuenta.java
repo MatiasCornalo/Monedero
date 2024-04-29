@@ -13,8 +13,6 @@ public class Cuenta {
 
   private double saldo = 0;
   private List<Movimiento> movimientos = new ArrayList<>();
- 
-
   private double limite = 1000;
 
   public Cuenta() {
@@ -53,6 +51,7 @@ public class Cuenta {
       throw new MaximoExtraccionDiarioException("No puede extraer mas de $ " + 1000
           + " diarios, límite: " + this.getLimite());
     }
+    
     Movimiento movimientoNuevo = new Movimiento(LocalDate.now(),cuanto,new Extraccion());
     this.agregarMovimiento(movimientoNuevo);
   }
