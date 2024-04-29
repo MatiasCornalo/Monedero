@@ -1,7 +1,7 @@
 package dds.monedero.model;
 
 class Deposito implements tipoTransaccion {
-    public double calcularValorDe(Cuenta cuenta,Double monto){
-        return cuenta.getSaldo() + monto;
+    public void modificarSaldo(Cuenta cuenta,Double monto){
+        cuenta.aumentarDinero(monto);
     }
 }

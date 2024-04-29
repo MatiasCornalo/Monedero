@@ -32,17 +32,12 @@ public class Movimiento {
     return isExtraccion() && esDeLaFecha(fecha);
 
   }
-
+  
   public boolean esDeLaFecha(LocalDate fecha) {
     return this.fecha.equals(fecha);
   }
 
-  public void agregateA(Cuenta cuenta) {
-    cuenta.setSaldo(calcularValor(cuenta));
-    cuenta.agregarMovimiento(this);
-  }
-
-  public double calcularValor(Cuenta cuenta) {
-    return tipo.calcularValorDe(cuenta,monto);
+  public void modificarSaldo(Cuenta cuenta) {
+    tipo.modificarSaldo(cuenta,monto);
   }
 }

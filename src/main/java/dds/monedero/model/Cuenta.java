@@ -13,6 +13,7 @@ public class Cuenta {
 
   private double saldo = 0;
   private List<Movimiento> movimientos = new ArrayList<>();
+  private double limite;
 
   public Cuenta() {
     saldo = 0;
@@ -44,10 +45,11 @@ public class Cuenta {
     this.validarSaldo(cuanto);
 
     double montoExtraidoHoy = getMontoExtraidoA(LocalDate.now());
-    double limite = 1000 - montoExtraidoHoy;
+    this.disminuirLimite(montoExtraidoHoy);
+
     if (cuanto > limite) {
       throw new MaximoExtraccionDiarioException("No puede extraer mas de $ " + 1000
-          + " diarios, límite: " + limite);
+          + " diarios, límite: " + this.getLimite());
     }
     Movimiento movimientoNuevo = new Movimiento(LocalDate.now(),cuanto,new Extraccion());
     this.agregarMovimiento(movimientoNuevo);
@@ -55,7 +57,24 @@ public class Cuenta {
 
   // La cuenta conocia demasiado la composicion de un movimiento, se rompia el encapsulamiento
   public void agregarMovimiento(Movimiento movimiento) {
+    movimiento.modificarSaldo(this);
     movimientos.add(movimiento);
+  }
+
+  public void aumentarDinero(Double monto){
+    saldo += monto;
+  }
+
+  public void disminuirDinero(Double monto){
+    saldo -= monto;
+  }
+
+  public double getLimite(){
+    return limite;
+  }
+
+  public void disminuirLimite(double monto){
+    limite -= monto;
   }
 
   public double getMontoExtraidoA(LocalDate fecha) {
