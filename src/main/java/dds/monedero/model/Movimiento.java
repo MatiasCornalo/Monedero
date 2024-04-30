@@ -28,6 +28,10 @@ public class Movimiento {
     return tipo.isExtraccion() && esDeLaFecha(fecha);
   }
 
+  public boolean fueDepositadoEn(LocalDate fecha){
+    return !tipo.isExtraccion() && esDeLaFecha(fecha);
+  }
+
   public boolean isDeposito(){
     return !tipo.isExtraccion();
   }
